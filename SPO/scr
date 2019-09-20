@@ -1,0 +1,35 @@
+#!/bin/bash
+count=0
+function recursion {
+  count=$(($count + 1))
+  local file1=$1;
+
+  for file in $file1/*
+  do
+  if [ -f "$file" ]
+  then
+  for (( i=1; i <= $count; i++ ))
+  do
+  printf "║ "
+  done
+  local filesize=$(stat -c%s "$file")
+  printf "╠═ ${file##*/} ${filesize} bytes\n"
+  fi
+  done
+  
+  for file in $file1/*
+  do
+  if [ -d "$file" ]
+  then
+  for (( i=1; i <= $count; i++ ))
+  do
+  printf "║ "
+  done
+  printf "║ ${file##*/}\n"
+  recursion $file
+  count=$(($count - 1))
+  fi
+  done
+}
+recursion $(pwd)
+
