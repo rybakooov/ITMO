@@ -1,5 +1,8 @@
 #!/bin/bash
 
+rm -f ./result.xls
+printf "Name\tModify\tSize\tWay\tDuration\n" >> result.xls
+
 BC_OK=$(dpkg-query -W --showformat='${Status}\n' bc|grep "install ok installed")
 if [ "" == "$BC_OK" ]
 then
@@ -40,6 +43,7 @@ function recursion {
     local timeMin=$(echo "scale=0; $time / 60" | bc);
     local timeSec=$(echo "scale=0; $time % 60" | bc);
     printf "╠═ ${file##*/}, ${filesize} MB, изменено ${dateModify}, ${timeMin} минут, ${timeSec} секунд\n"
+    printf "${file##*/}\t${dateModify}\t${filesize} MB\t${file}\t${timeMin} минут, ${timeSec}\n" >> result.xls
   fi
   
   
