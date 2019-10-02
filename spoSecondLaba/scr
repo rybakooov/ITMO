@@ -1,0 +1,18 @@
+#!/bin/bash
+
+sudo apt-get update
+sudo apt-get install git-core curl build-essential openssl libssl-dev git
+
+git clone https://github.com/nodejs/node
+#cd node
+#./configure
+#make 
+#sudo checkinstall
+#node -v
+#cd ..
+
+#git clone git@github.com:popcorn-official/popcorn-desktop.git
+
+#cd popcorn-desktop
+#chmod ugo+x make_popcorn.sh 
+#./make_popcorn.sh
