@@ -23,52 +23,58 @@ function recursion {
 
   for file in $file1/*
   do
-  if [ -f "$file" ]
-  then
-  for (( i=1; i <= $count; i++ ))
-  do
-    printf "║ "
-  done
-  local filesize=$(stat -c%s "$file")
-  filesize=$(echo "scale=4; $filesize / 1024 / 1024" | bc)
-  local dateModify=$(date +"%d.%m.%Y в %H:%M" --reference="$file")
-  local time=$(ffprobe \
-    -v quiet  \
-    -print_format ini  \
-    -show_format  \
-    "$file" | grep duration | sed s/duration=//)
+    if [ -f "$file" ]
+    then
+      for (( i=1; i <= $count; i++ ))
+      do
+        printf "║ "
+      done
+      local filesize=$(stat -c%s "$file")
+      filesize=$(echo "scale=4; $filesize / 1024 / 1024" | bc)
+      local dateModify=$(date +"%d.%m.%Y в %H:%M" --reference="$file")
+      local time=$(ffprobe \
+        -v quiet  \
+        -print_format ini  \
+        -show_format  \
+        "$file" | grep duration | sed s/duration=//)
 
-  if [ -z "$time" ]
-  then
-    printf "╠═ ${file##*/}, ${filesize} MB, изменено ${dateModify}\n"
-    printf "${file##*/}\t${dateModify}\t${filesize} MB\t${file}\n" >> result.xls
-  else
-    local timeMin=$(echo "scale=0; $time / 60" | bc);
-    local timeSec=$(echo "scale=0; $time % 60" | bc);
+      if [ -z "$time" ]
+      then
+        printf "╠═ ${file##*/}, ${filesize} MB, изменено ${dateModify}\n"
+        printf "${file##*/}\t${dateModify}\t${filesize} MB\t${file}\n" >> result.xls
+      else
+        local timeMin=$(echo "scale=0; $time / 60" | bc);
+        local timeSec=$(echo "scale=0; $time % 60" | bc);
+        timeSec=$(echo ${timeSec} | cut -d'.' -f1)
+        if [ -z "$timeSec" ]
+        then 
+          timeSec="0"
+        fi
 
-    printf "╠═ ${file##*/}, ${filesize} MB, изменено ${dateModify}, ${timeMin} минут, ${timeSec} секунд\n"
-    printf "${file##*/}\t${dateModify}\t${filesize} MB\t${file}\t${timeMin} минут, ${timeSec}\n" >> result.xls
-  fi
-  
-  
-
-  
-  
-  fi
+        if [ "$timeSec" == "0" ] && [ "$timeMin" == "0" ]
+        then
+          printf "╠═ ${file##*/}, ${filesize} MB, изменено ${dateModify}\n"
+          printf "${file##*/}\t${dateModify}\t${filesize} MB\t${file}\n" >> result.xls
+        else
+          printf "╠═ ${file##*/}, ${filesize} MB, изменено ${dateModify}, ${timeMin} минут, ${timeSec} секунд\n"
+          printf "${file##*/}\t${dateModify}\t${filesize} MB\t${file}\t${timeMin} минут,${timeSec} секунд\n" >> result.xls
+        fi
+      fi
+    fi
   done
   
   for file in $file1/*
   do
-  if [ -d "$file" ]
-  then
-  for (( i=1; i <= $count; i++ ))
-  do
-  printf "║ "
-  done
-  printf "║ ${file##*/}\n"
-  recursion $file
-  count=$(($count - 1))
-  fi
+    if [ -d "$file" ]
+    then
+      for (( i=1; i <= $count; i++ ))
+      do
+        printf "║ "
+      done
+      printf "║ ${file##*/}\n"
+      recursion $file
+      count=$(($count - 1))
+    fi
   done
 }
 recursion $(pwd)
