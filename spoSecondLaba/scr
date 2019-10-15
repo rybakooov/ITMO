@@ -1,18 +1,10 @@
 #!/bin/bash
 
-sudo apt-get update
-sudo apt-get install git-core curl build-essential openssl libssl-dev git
+wget https://get.popcorntime.sh/build/Popcorn-Time-0.3.10-Linux-64.tar.xz -O popcorntime.tar.xz
+sudo mkdir /opt/popcorntime
+sudo tar Jxf popcorntime.tar.xz -C /opt/popcorntime
+sudo ln -sf /opt/popcorntime/Popcorn-Time /usr/bin/Popcorn-Time
+rm popcorntime.tar.xz
 
-git clone https://github.com/nodejs/node
-#cd node
-#./configure
-#make 
-#sudo checkinstall
-#node -v
-#cd ..
-
-#git clone git@github.com:popcorn-official/popcorn-desktop.git
-
-#cd popcorn-desktop
-#chmod ugo+x make_popcorn.sh 
-#./make_popcorn.sh
+cd /opt/popcorntime/
+./Popcorn-Time
