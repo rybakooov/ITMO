@@ -1,9 +1,8 @@
 #!/bin/bash
 
-wget https://get.popcorntime.sh/build/Popcorn-Time-0.3.10-Linux-64.tar.xz -O popcorntime.tar.xz
+wget https://get.popcorntime.sh/build/Popcorn-Time-0.3.10-Linux-64.tar.xz -O popcorntime.tar.xz # -O файл (--output-document) - файл в который будут сохранены полученные данные
 sudo mkdir /opt/popcorntime
-sudo tar Jxf popcorntime.tar.xz -C /opt/popcorntime
-sudo ln -sf /opt/popcorntime/Popcorn-Time /usr/bin/Popcorn-Time
+sudo tar Jxf popcorntime.tar.xz -C /opt/popcorntime #разархивирование через команду tar Jxf - (сжимать архив через bzip2, извлечение архивного файла, имя архивного файла) C - куда разархивируем
 rm popcorntime.tar.xz
 
 cd /opt/popcorntime/
