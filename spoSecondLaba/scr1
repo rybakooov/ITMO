@@ -1,0 +1,9 @@
+#!/bin/bash
+
+sudo apt install nodejs
+sudo apt install npm
+git clone git@github.com:popcorn-official/popcorn-desktop.git
+
+cd popcorn-desktop
+sudo chmod +x make_popcorn.sh
+./make_popcorn.sh

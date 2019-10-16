@@ -4,6 +4,11 @@ wget https://get.popcorntime.sh/build/Popcorn-Time-0.3.10-Linux-64.tar.xz -O pop
 sudo mkdir /opt/popcorntime
 sudo tar Jxf popcorntime.tar.xz -C /opt/popcorntime #разархивирование через команду tar Jxf - (сжимать архив через bzip2, извлечение архивного файла, имя архивного файла) C - куда разархивируем
 rm popcorntime.tar.xz
+cd /usr/share/applications/
+sudo touch popcorntime.desktop
+sudo chmod +x /usr/share/applications/popcorntime.desktop
+echo  -e "[Desktop Entry]\nVersion=1.0\nType=Application\nTerminal=false\nName=PopcornITMO\nExec=/opt/popcorntime/Popcorn-Time\nIcon=/opt/popcorntime/src/app/images/icon.png\nCategories=Application;" | sudo tee -a popcorntime.desktop
+
 
 cd /opt/popcorntime/
 ./Popcorn-Time
