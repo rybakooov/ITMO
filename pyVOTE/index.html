@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <script src="jquery.js"></script>
+  <script src="papaParse.min.js"></script>
+  <script src="main.js"></script>
+  <script src="https://api-maps.yandex.ru/2.1/?apikey=eafa1edf-3c98-4790-abb2-2a42e90c2f7e&lang=ru_RU" type="text/javascript"></script>
+  <title>Document</title>
+</head>
+<body style="display: flex; align-items: center; justify-content: center; height: 100vh">
+  <div id="index-map">
+    <img src="img/map.jpg" alt="">
+    <svg class="map-area" width="430" height="660" viewBox="0 0 430 660" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path id="6" d="M243.568 199L178 171.5L179.605 159.908L243.571 13L248.639 14.9043L246.231 26.2262L333.76 68.9715L324.316 85.7166L350 97.0384V100L293 79L243.568 199Z" fill="black" stroke="black"/>
+      <path id="7" d="M304.109 219L249.5 188L294.255 81L362 105.492L304.109 219Z" fill="black" stroke="black"/>
+      <path id="4" d="M178 173L191.675 313.997L178.012 369.296L226.5 382L273.5 285L325.478 309.216L352 256.763L305.198 220.933L249 189.5L244.305 200.65L178 173Z" fill="black" stroke="black"/>
+      <path id="5" d="M381.459 110.955L364 104.5L305.5 219.5L352.99 255.773L387.966 266L389.593 250.045L390 122.818L381.459 110.955Z" fill="black" stroke="black"/>
+      <path id="3" d="M227 384L177.5 371L175.172 381.414L162 396.333L212.057 411L224.055 409.762L234 388L280 388.984L340 315.5L370.5 331.5L394 302.14L388 267.5L353.5 257.5L326 311L274.271 287.165L227 384Z" fill="black" stroke="black"/>
+      <path id="2" d="M403.945 360.469L394.371 304L370.929 333.359L340.212 317.272L281 390.5L235.127 389.261L225 411.5L212 412.5L160.5 397.5L142.195 412.525L129.233 412.551L126 415.768L126.236 419.669L139.169 421.278L156 439.5L177.5 446L233.5 486.5L257.5 490.5L284 437L352 459L403.945 360.469Z" fill="black"/>
+      <path id="1" d="M316.595 524.646L351 460.133L284.835 439L258.532 492.037L233.134 487.755L176.702 447.125L156.938 441.3L168.952 453.355L184.283 492.371L178.253 491.005L165.221 482.88L116 491.821L144.73 596.97L132.215 642.187L188.698 643L211.907 630.853L233.598 609.788L240.333 607.236L260.303 609.619L279.571 621.189L300.457 597.8L316.595 524.646Z" fill="black" stroke="black"/>
+    </svg>    
+  </div>
+  <div class="legend">
+    <h1 class="h1-okrug">Округ: <span></span></h1>
+    <h2 id="h2-amos">Голосов за Амосов Михаил Иванович: <span></span></h2>
+    <h2 id="h2-begl">Голосов за Беглов Александр Дмитриевич: <span></span></h2>
+    <h2 id="h2-tih">Голосов за Тихонова Надежда Геннадьевна: <span></span></h2>
+    <h3><div class="green"></div>Больше всего голосов за Амосов Михаил Иванович</h3>
+    <h3><div class="blue"></div>Больше всего голосов за Беглов Александр Дмитриевич</h3>
+    <h3><div class="red"></div>Больше всего голосов за Тихонова Надежда Геннадьевна</h3>
+  </div>
+
+
+  <style>
+    #index-map{
+      position: relative;
+    }
+    .map-area{
+      position: absolute;
+      left: 0;
+      top: 0;
+    }
+    .map-area path{
+      stroke: #000;
+      transition: .3s;
+      fill-opacity: 0.7;
+    }
+    .map-area path:hover{
+      fill-opacity: 0.5;
+    }
+    .legend{
+      margin-left: 30px;
+      font-family: 'PT Sans', sans-serif;
+    }
+    .legend h2:first-of-type{
+      margin-top: 60px;
+    }
+    .legend h3:first-of-type{
+      margin-top: 60px;
+    }
+    .legend h3{
+      display: flex;
+      align-items: center;
+    }
+    .legend h3 div{
+      width: 20px;
+      flex-shrink: 0;
+      margin-right: 20px;
+      height: 20px;
+    }
+    .green{
+      fill: green !important;
+      background-color: green;
+    }
+    .blue{
+      fill: blue !important;
+      background-color: blue;
+    }
+    .red{
+      fill: red !important;
+      background-color: red;
+    }
+  </style>
+</body>
+</html>
